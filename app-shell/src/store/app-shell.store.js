@@ -5,10 +5,6 @@ class AppShellStore {
   @observable message = null;
   @observable drawerOpen = localStorage.getItem("@mf-tickets/drawer") !== 'false';
 
-  constructor() {
-    console.log(this.drawerOpen, localStorage.getItem("@mf-tickets/drawer"));
-  }
-
   @action
   showMessage (message, milliseconds = 5000) {
     this.message = message;
