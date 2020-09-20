@@ -54,7 +54,7 @@ class AppBar extends React.Component {
     return (
     <MuiAppBar
           position="absolute"
-          className={clsx(classes.appBar, this.props.drawer.open && classes.appBarShift)}
+          className={clsx(classes.appBar, this.props.appShellStore.drawerOpen && classes.appBarShift)}
         >
       <Toolbar className={classes.toolbar}>
         <Grid
@@ -67,10 +67,10 @@ class AppBar extends React.Component {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              onClick={this.props.drawer.openDrawer}
+              onClick={() => appShellStore.openCloseDrawer()}
               className={clsx(
                 classes.menuButton,
-                this.props.drawer.open && classes.menuButtonHidden
+                this.props.appShellStore.drawerOpen && classes.menuButtonHidden
               )}
             >
               <MenuIcon />

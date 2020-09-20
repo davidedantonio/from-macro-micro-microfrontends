@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  makeStyles,
+  withStyles,
   Divider,
   Drawer,
   IconButton,
@@ -19,8 +19,9 @@ import {
 import clsx from "clsx";
 
 import { Link, useMatch } from "react-router-dom";
+import {inject, observer} from "mobx-react";
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   toolbarIcon: {
     display: "flex",
     alignItems: "center",
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   menuIcon: {
     width: '1.5em'
   }
-}));
+});
 
 function ListItemLink(props) {
   const selected = useMatch(props.to);
@@ -73,32 +74,38 @@ function ListItemLink(props) {
   );
 }
 
-export default function AppDrawer(props) {
-  const classes = useStyles();
+@inject('appShellStore')
+@observer
+class AppDrawer extends React.Component {
+  render() {
+    const { classes } = this.props;
 
-  return (
-    <Drawer
-      variant="permanent"
-      classes={{
-        paper: clsx(
-          classes.drawerPaper,
-          !props.drawer.open && classes.drawerPaperClose
-        ),
-      }}
-      open={props.open}
-    >
-      <div className={classes.toolbarIcon}>
-        <IconButton onClick={props.drawer.closeDrawer}>
-          <ChevronLeftIcon />
-        </IconButton>
-      </div>
-      <Divider />
-      <List>
-        <ListItemLink to="dashboard" icon={<DashboardIcon className={classes.menuIcon} />} text="Dashboard" />
-        <ListItemLink to="users" icon={<UsersIcon className={classes.menuIcon} />} text="Users" />
-        <ListItemLink to="tickets" icon={<TicketsIcon className={classes.menuIcon} />} text="Tickets" />
-        <ListItemLink to="vue" icon={<BallotIcon className={classes.menuIcon} />} text="Vue" />
-      </List>
-    </Drawer>
-  );
+    return (
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(
+            classes.drawerPaper,
+            !this.props.appShellStore.drawerOpen && classes.drawerPaperClose
+          ),
+        }}
+        open={this.props.appShellStore.drawerOpen}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={() => this.props.appShellStore.openCloseDrawer()}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          <ListItemLink to="dashboard" icon={<DashboardIcon className={classes.menuIcon} />} text="Dashboard" />
+          <ListItemLink to="users" icon={<UsersIcon className={classes.menuIcon} />} text="Users" />
+          <ListItemLink to="tickets" icon={<TicketsIcon className={classes.menuIcon} />} text="Tickets" />
+          <ListItemLink to="vue" icon={<BallotIcon className={classes.menuIcon} />} text="Vue" />
+        </List>
+      </Drawer>
+    );
+  }
 }
+
+export default withStyles(styles)(AppDrawer)

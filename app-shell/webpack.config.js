@@ -51,8 +51,7 @@ module.exports = {
         vue: "vue"
       },
       exposes: {
-        "./AppShell": "./src/components/AppShell",
-        "./Service": "./src/components/Service"
+        "./AppShell": "./src/components/AppShell"
       },
       shared: [
         {
@@ -66,7 +65,6 @@ module.exports = {
             requiredVersion: deps["react-dom"],
           },
         },
-        "./src/components/Service",
       ],
     }),
     new HtmlWebpackPlugin({
