@@ -1,0 +1,26 @@
+{
+  "name": "mfe-tickets-app",
+  "version": "1.0.0",
+  "description": "MFE with federated modules",
+  "private": true,
+  "scripts": {
+    "install:all": "concurrently \"npm:mf-app-shell-install\" \"npm:mf-auth-install\" \"npm:mf-users-install\" \"npm:mf-tickets-install\"",
+    "dev:all": "concurrently \"npm:mf-app-shell\" \"npm:mf-nav\" \"npm:mf-auth\" \"npm:mf-users\" \"npm:mf-tickets\" \"npm:mf-vue\"",
+    "mf-app-shell": "cd ./app-shell && yarn start",
+    "mf-nav": "cd ./nav && yarn start",
+    "mf-auth": "cd ./auth && yarn start",
+    "mf-users": "cd ./users && yarn start",
+    "mf-tickets": "cd ./tickets && yarn start",
+    "mf-vue": "cd ./vue && yarn start",
+    "mf-app-shell-install": "cd ./app-shell && yarn install",
+    "mf-auth-install": "cd ./auth && yarn install",
+    "mf-nav-install": "cd ./nav && yarn install",
+    "mf-users-install": "cd ./users && yarn install",
+    "mf-tickets-install": "cd ./tickets && yarn install"
+  },
+  "author": "Davide D'Antonio <davide.dantonio@webeetle.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}

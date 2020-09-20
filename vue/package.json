@@ -1,0 +1,27 @@
+{
+  "name": "@mf-tickets/vue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "dotenv": "^8.2.0",
+    "html-webpack-plugin": "4.3.0",
+    "serve": "^11.3.0",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.2",
+    "vue-server-renderer": "^2.6.11",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "5.0.0-beta.16",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "3.11.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production",
+    "serve": "serve dist -p 3004"
+  }
+}

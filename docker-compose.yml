@@ -1,0 +1,74 @@
+version: '3'
+services:
+  mf-app-shell:
+    image: node:11.12.0
+    container_name: mf_app_shell
+    restart: always
+    ports:
+      - "9001:9001"
+    expose:
+      - "9001"
+    volumes:
+      - ./app-shell/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+  mf-auth:
+    image: node:11.12.0
+    container_name: mf_auth
+    restart: always
+    ports:
+      - "9002:9002"
+    expose:
+      - "9002"
+    volumes:
+      - ./auth/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+  mf-users:
+    image: node:11.12.0
+    container_name: mf_users
+    restart: always
+    ports:
+      - "9003:9003"
+    expose:
+      - "9003"
+    volumes:
+      - ./users/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+  mf-tickets:
+    image: node:11.12.0
+    container_name: mf_tickets
+    restart: always
+    ports:
+      - "9004:9004"
+    expose:
+      - "9004"
+    volumes:
+      - ./tickets/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+  mf-vue:
+    image: node:11.12.0
+    container_name: mf_vue
+    restart: always
+    ports:
+      - "9005:9005"
+    expose:
+      - "9005"
+    volumes:
+      - ./vue/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+  mf-nav:
+    image: node:11.12.0
+    container_name: mf_nav
+    restart: always
+    ports:
+      - "9006:9006"
+    expose:
+      - "9006"
+    volumes:
+      - ./nav/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
