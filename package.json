@@ -4,7 +4,7 @@
   "description": "MFE with federated modules",
   "private": true,
   "scripts": {
-    "install:all": "concurrently \"npm:mf-app-shell-install\" \"npm:mf-auth-install\" \"npm:mf-users-install\" \"npm:mf-tickets-install\"",
+    "install:all": "concurrently \"npm:mf-app-shell-install\" \"npm:mf-nav-install\" \"npm:mf-auth-install\" \"npm:mf-users-install\" \"npm:mf-tickets-install\" \"npm:mf-vue-install\"",
     "dev:all": "concurrently \"npm:mf-app-shell\" \"npm:mf-nav\" \"npm:mf-auth\" \"npm:mf-users\" \"npm:mf-tickets\" \"npm:mf-vue\"",
     "mf-app-shell": "cd ./app-shell && yarn start",
     "mf-nav": "cd ./nav && yarn start",
@@ -12,6 +12,7 @@
     "mf-users": "cd ./users && yarn start",
     "mf-tickets": "cd ./tickets && yarn start",
     "mf-vue": "cd ./vue && yarn start",
+    "mf-vue-install": "cd ./vue && yarn install",
     "mf-app-shell-install": "cd ./app-shell && yarn install",
     "mf-auth-install": "cd ./auth && yarn install",
     "mf-nav-install": "cd ./nav && yarn install",
