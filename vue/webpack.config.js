@@ -2,7 +2,7 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
 const dotenv = require('dotenv').config( {
-  path: path.join(__dirname, '.env')
+  path: path.join(__dirname, '.env.local')
 })
 
 module.exports = {

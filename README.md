@@ -1,18 +1,6 @@
 # Micro-frontends example with Federated Modules
 
-Install all dependencies 
-
-```
-yarn install:all
-```
-
 Run in locale
-
-```
-yarn dev:all
-```
-
-or with docker
 
 ```
 docker-compose up

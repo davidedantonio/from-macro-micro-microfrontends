@@ -7,8 +7,7 @@
     "start": "webpack-dev-server",
     "build": "webpack --mode production",
     "serve": "serve dist -p 9001",
-    "clean": "rm -rf dist",
-    "lint": "eslint src/**/*.js"
+    "clean": "rm -rf dist"
   },
   "author": "Davide D'Antonio",
   "license": "MIT",

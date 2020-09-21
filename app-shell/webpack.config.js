@@ -3,7 +3,7 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const path = require('path')
 const deps = require('./package.json').dependencies
 const dotenv = require('dotenv').config( {
-  path: path.join(__dirname, '.env')
+  path: path.join(__dirname, '.env.local')
 });
 
 module.exports = {
