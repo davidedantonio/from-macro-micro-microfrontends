@@ -24,34 +24,34 @@ module.exports = {
   },
   output: {
     publicPath: `http://localhost:${dotenv.parsed.APP_PORT}/`,
-    chunkFilename: "[id].[contenthash].js"
+    chunkFilename: '[id].[contenthash].js'
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         exclude: /node_modules/,
         options: {
-          presets: ["@babel/preset-react"],
+          presets: ['@babel/preset-react'],
         },
       },
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "shell",
-      library: { type: "var", name: "shell" },
-      filename: "appShell.js",
+      name: 'shell',
+      library: { type: 'var', name: 'shell' },
+      filename: 'appShell.js',
       remotes: {
-        nav: "nav",
-        auth: "auth",
-        users: "users",
-        tickets: "tickets",
-        vue: "vue"
+        nav: 'nav',
+        auth: 'auth',
+        users: 'users',
+        tickets: 'tickets',
+        vue: 'vue'
       },
       exposes: {
-        "./AppShell": "./src/components/AppShell"
+        './AppShell': './src/components/AppShell'
       },
       shared: [
         {
@@ -60,15 +60,15 @@ module.exports = {
             singleton: true,
             requiredVersion: deps.react,
           },
-          "react-dom": {
+          'react-dom': {
             singleton: true,
-            requiredVersion: deps["react-dom"],
+            requiredVersion: deps['react-dom'],
           },
         },
       ],
     }),
     new HtmlWebpackPlugin({
-      template: "./public/index.ejs",
+      template: './public/index.ejs',
       templateParameters: {
         ...dotenv.parsed
       },

@@ -76,6 +76,6 @@ module.exports = {
       templateParameters: {
         ...dotenv.parsed
       }
-    }),
+    })
   ],
 }
