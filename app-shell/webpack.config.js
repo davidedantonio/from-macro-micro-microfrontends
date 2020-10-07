@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin
 const path = require('path')
+const { DefinePlugin } = require('webpack')
 const deps = require('./package.json').dependencies
 const dotenv = require('dotenv').config( {
   path: path.join(__dirname, '.env.local')
@@ -39,6 +40,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed)
+    }),
     new ModuleFederationPlugin({
       name: 'shell',
       library: { type: 'var', name: 'shell' },
@@ -47,8 +51,7 @@ module.exports = {
         nav: 'nav',
         auth: 'auth',
         users: 'users',
-        tickets: 'tickets',
-        vue: 'vue'
+        tickets: 'tickets'
       },
       exposes: {
         './AppShell': './src/components/AppShell'

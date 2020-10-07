@@ -33,6 +33,7 @@
     "history": "^5.0.0",
     "mobx": "^5.15.6",
     "mobx-react": "^6.3.0",
+    "node-localstorage": "^2.1.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

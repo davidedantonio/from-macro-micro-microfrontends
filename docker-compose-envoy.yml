@@ -1,0 +1,101 @@
+version: '3'
+services:
+  mf-envoy:
+    container_name: mf-envoy
+    build:
+      context: .
+      dockerfile: ./envoy/Dockerfile
+    volumes:
+      - ./envoy/mf-envoy.yaml:/etc/mf-envoy.yaml
+    expose:
+      - "9999"
+    networks:
+      - envoymesh
+    ports:
+      - "9999:9999"
+
+  mf-app-shell:
+    image: node:11.12.0
+    container_name: mf_app_shell
+    ports:
+      - "9001:9001"
+    expose:
+      - "9001"
+    networks:
+      - envoymesh
+    volumes:
+      - ./app-shell/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+
+  mf-auth:
+    image: node:11.12.0
+    container_name: mf_auth
+    ports:
+      - "9002:9002"
+    expose:
+      - "9002"
+    networks:
+      - envoymesh
+    volumes:
+      - ./auth/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+
+  mf-users:
+    image: node:11.12.0
+    container_name: mf_users
+    ports:
+      - "9003:9003"
+    expose:
+      - "9003"
+    networks:
+      - envoymesh
+    volumes:
+      - ./users/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+
+  mf-tickets:
+    image: node:11.12.0
+    container_name: mf_tickets
+    ports:
+      - "9004:9004"
+    expose:
+      - "9004"
+    networks:
+      - envoymesh
+    volumes:
+      - ./tickets/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+
+  mf-vue:
+    image: node:11.12.0
+    container_name: mf_vue
+    ports:
+      - "9005:9005"
+    expose:
+      - "9005"
+    volumes:
+      - ./vue/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+
+  mf-nav:
+    image: node:11.12.0
+    container_name: mf_nav
+    restart: always
+    ports:
+      - "9006:9006"
+    expose:
+      - "9006"
+    networks:
+      - envoymesh
+    volumes:
+      - ./nav/:/app
+    command: bash -c "cd /app && yarn install && yarn start"
+    tty: true
+
+networks:
+  envoymesh: { }

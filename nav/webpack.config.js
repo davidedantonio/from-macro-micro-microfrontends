@@ -54,7 +54,7 @@ module.exports = {
         vue: 'vue'
       },
       exposes: {
-        './AppBar': './src/components/AppBarWrapper',
+        './AppBar': './src/components/AppBar',
         './AppDrawer': './src/components/AppDrawer'
       },
       shared: [

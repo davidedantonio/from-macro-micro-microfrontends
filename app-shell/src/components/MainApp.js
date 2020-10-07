@@ -5,8 +5,7 @@ import {Box} from "@material-ui/core";
 import React from "react";
 import {appShellStore} from "../store/app-shell.store";
 import GlobalSnackbar from "./Snackbar/GlobalSnackbar";
-import {localStorageSync} from "./localStorageSync";
-import VueAppContainer from "./vueContainers/VueAppContainer";
+//import VueAppContainer from "./vueContainers/VueAppContainer";
 
 const AppBar = React.lazy(() => import("nav/AppBar"));
 const AppDrawer = React.lazy(() => import("nav/AppDrawer"));
@@ -35,7 +34,7 @@ const MainApp = inject("store")(observer(({store}) => {
                       <Route path="dashboard/*" element={<span>Dashboard</span>} />
                       <Route path="users/*" element={<UsersService appShellStore={store} />} />
                       <Route path="tickets/*" element={<TicketsService appShellStore={store} />} />
-                      <Route path="vue/*" element={<VueAppContainer />} />
+                      {/*<Route path="vue/*" element={<VueAppContainer />} />*/}
                       <Route
                         path="*"
                         element={<Navigate to="/dashboard" replace />}
