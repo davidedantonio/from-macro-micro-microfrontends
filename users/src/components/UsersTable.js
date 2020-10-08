@@ -9,8 +9,9 @@ import AddUser from "./AddUser";
 @observer
 class UsersTable extends React.Component {
   async componentDidMount() {
+    const { store, appShellStore } = this.props;
+
     try {
-      const { store, appShellStore } = this.props;
       appShellStore.changeTitle("Users");
       await store.loadUsers();
       appShellStore.showMessage({
@@ -18,7 +19,10 @@ class UsersTable extends React.Component {
         message: 'Users list loaded!'
       })
     } catch (e) {
-      console.log(e);
+      appShellStore.showMessage({
+        variant: 'error',
+        message: e.message
+      })
     }
   }
 

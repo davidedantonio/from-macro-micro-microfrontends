@@ -11,6 +11,7 @@ class UsersStore {
   @observable rows = [];
   @observable currentUser = null;
   @observable error = null;
+  @observable count = 0;
 
   @action
   async loadUsers () {
@@ -19,6 +20,16 @@ class UsersStore {
       this.rows = response.data;
     } catch (e) {
       console.log(e)
+    }
+  }
+
+  @action
+  async loadUsersCount () {
+    try {
+      const response = await client.get("/api/user/count");
+      this.count = response.data.count;
+    } catch (e) {
+      throw new Error(e.response.data.message);
     }
   }
 
