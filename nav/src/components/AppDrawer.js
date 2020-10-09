@@ -98,9 +98,8 @@ class AppDrawer extends React.Component {
         </div>
         <Divider />
         <List>
-          <ListItemLink to="dashboard" icon={<DashboardIcon className={classes.menuIcon} />} text="Dashboard" />
-          <ListItemLink to="users" icon={<UsersIcon className={classes.menuIcon} />} text="Users" />
           <ListItemLink to="tickets" icon={<TicketsIcon className={classes.menuIcon} />} text="Tickets" />
+          <ListItemLink to="users" icon={<UsersIcon className={classes.menuIcon} />} text="Users" />
           <ListItemLink to="vue" icon={<BallotIcon className={classes.menuIcon} />} text="Vue" />
         </List>
       </Drawer>

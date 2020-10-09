@@ -79,7 +79,7 @@ class addTicket extends React.Component {
       <React.Fragment>
         <Fab
           onClick={() => this.openModal()}
-          aria-label={"Add User"}
+          aria-label={"Add Ticket"}
           className={classes.fab}
           color={'primary'}>
           <Add />

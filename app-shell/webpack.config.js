@@ -46,8 +46,8 @@ module.exports = {
       remotes: {
         nav: 'nav',
         auth: 'auth',
-        users: 'users',
         tickets: 'tickets',
+        users: 'users',
         vue: 'vue'
       },
       exposes: {

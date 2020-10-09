@@ -1,9 +1,16 @@
 # Micro-frontends example with Federated Modules
 
-Run in locale
+## Install and run
 
 ```
-docker-compose up
+$ yarn install:all
+$ yarn dev:all
+```
+
+## Run with docker
+
+```
+$ docker-compose up -d
 ```
 
 # Microservices used

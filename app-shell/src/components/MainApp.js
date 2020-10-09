@@ -7,7 +7,6 @@ import {appShellStore} from "../store/app-shell.store";
 import GlobalSnackbar from "./Snackbar/GlobalSnackbar";
 import VueAppContainer from "./vueContainers/VueAppContainer";
 import Loading from "./Loading";
-import Dashboard from "./Dashboard";
 
 const AppBar = React.lazy(() => import("nav/AppBar"));
 const AppDrawer = React.lazy(() => import("nav/AppDrawer"));
@@ -32,14 +31,13 @@ const MainApp = inject("store")(observer(({store}) => {
 
                   <div style={{ paddingTop: 80, paddingRight: 20, paddingLeft: 20, width: '100%' }}>
                     <Routes>
-                      <Route path="/" element={<Dashboard />} />
-                      <Route path="dashboard/*" element={<Dashboard />} />
+                      <Route path="/" element={<TicketsService appShellStore={store} />} />
                       <Route path="users/*" element={<UsersService appShellStore={store} />} />
                       <Route path="tickets/*" element={<TicketsService appShellStore={store} />} />
                       <Route path="vue/*" element={<VueAppContainer />} />
                       <Route
                         path="*"
-                        element={<Navigate to="/dashboard" replace />}
+                        element={<Navigate to="/" replace />}
                       />
                     </Routes>
                   </div>

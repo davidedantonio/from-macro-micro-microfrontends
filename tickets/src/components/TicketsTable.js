@@ -20,15 +20,15 @@ class TicketsTable extends React.Component {
   async componentDidMount() {
     try {
       const { store } = this.props;
-      await store.loadTickets();
       this.props.appShellStore.changeTitle("Tickets");
+      await store.loadTickets();
       this.props.appShellStore.showMessage({
         variant: 'success',
         message: `Tickets list loaded!`
       });
     } catch (e) {
       this.props.appShellStore.showMessage({
-        variant: 'success',
+        variant: 'error',
         message: e.message
       });
     }
@@ -69,8 +69,8 @@ class TicketsTable extends React.Component {
           </Table>
         </Paper>
 
-        <AddTicket />
         <TicketInfo />
+        <AddTicket />
       </Container>
     )
   }

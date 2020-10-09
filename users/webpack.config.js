@@ -55,8 +55,7 @@ module.exports = {
         nav: 'nav'
       },
       exposes: {
-        './Users': './src/components/Users',
-        './UsersWidget': './src/components/UserWidgetWrapper'
+        './Users': './src/components/Users'
       },
       shared: [
         {

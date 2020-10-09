@@ -27,7 +27,7 @@ class UsersTable extends React.Component {
   }
 
   render() {
-    const { store, appShellStore } = this.props;
+    const { store } = this.props;
 
     return (
       <Container maxWidth={'md'}>

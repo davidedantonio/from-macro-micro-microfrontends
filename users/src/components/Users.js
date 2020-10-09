@@ -3,6 +3,7 @@ import UsersStore from "./../store/users.store";
 import { Provider } from "mobx-react";
 import UsersTable from "./UsersTable";
 import {Grid} from "@material-ui/core";
+
 const userStore = new UsersStore();
 
 function Users (props) {

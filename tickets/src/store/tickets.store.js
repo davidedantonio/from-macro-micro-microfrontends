@@ -33,6 +33,16 @@ class TicketsStore {
   }
 
   @action
+  async loadTicketsCount () {
+    try {
+      const response = await client.get("/api/ticket/count");
+      this.count = response.data.count;
+    } catch (e) {
+      throw new Error(e.response.data.message);
+    }
+  }
+
+  @action
   async addTicket (ticket) {
     if (!ticket.subject || !ticket.body) {
       this.error = 'All fields are required!'
