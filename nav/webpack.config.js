@@ -37,6 +37,12 @@ module.exports = {
           presets: ['@babel/preset-react'],
         },
       },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      }
     ],
   },
   plugins: [

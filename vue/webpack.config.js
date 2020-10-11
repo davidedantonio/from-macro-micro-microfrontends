@@ -44,6 +44,12 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      }
     ],
   },
 
