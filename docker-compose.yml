@@ -3,7 +3,6 @@ services:
   mf-app-shell:
     image: node:11.12.0
     container_name: mf_app_shell
-    restart: always
     ports:
       - "9001:9001"
     expose:
@@ -15,7 +14,6 @@ services:
   mf-auth:
     image: node:11.12.0
     container_name: mf_auth
-    restart: always
     ports:
       - "9002:9002"
     expose:
@@ -27,7 +25,6 @@ services:
   mf-users:
     image: node:11.12.0
     container_name: mf_users
-    restart: always
     ports:
       - "9003:9003"
     expose:
@@ -39,7 +36,6 @@ services:
   mf-tickets:
     image: node:11.12.0
     container_name: mf_tickets
-    restart: always
     ports:
       - "9004:9004"
     expose:
@@ -51,7 +47,6 @@ services:
   mf-vue:
     image: node:11.12.0
     container_name: mf_vue
-    restart: always
     ports:
       - "9005:9005"
     expose:
@@ -63,7 +58,6 @@ services:
   mf-nav:
     image: node:11.12.0
     container_name: mf_nav
-    restart: always
     ports:
       - "9006:9006"
     expose:
