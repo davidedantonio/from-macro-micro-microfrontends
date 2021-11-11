@@ -12,11 +12,12 @@ module.exports = {
   mode: 'development',
   devServer: {
     host: '0.0.0.0',
-    contentBase: path.join(__dirname, 'dist'),
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
     port: dotenv.parsed.APP_PORT,
     historyApiFallback: true,
-    hot: false,
-    hotOnly: false,
+    hot: false
   },
   output: {
     publicPath: `http://localhost:${dotenv.parsed.APP_PORT}/`,

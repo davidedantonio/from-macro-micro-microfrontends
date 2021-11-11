@@ -15,7 +15,6 @@ module.exports = {
     port: dotenv.parsed.APP_PORT,
     historyApiFallback: true,
     hot: false,
-    hotOnly: false
   },
   devtool: 'source-map',
 

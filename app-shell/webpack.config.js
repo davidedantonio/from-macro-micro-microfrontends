@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin
 const path = require('path')
 const deps = require('./package.json').dependencies
+
 const dotenv = require('dotenv').config( {
   path: path.join(__dirname, '.env.local')
 });
@@ -11,11 +12,12 @@ module.exports = {
   mode: 'development',
   devServer: {
     host: '0.0.0.0',
-    contentBase: path.join(__dirname, 'dist'),
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
     port: dotenv.parsed.APP_PORT,
     historyApiFallback: true,
-    hot: false,
-    hotOnly: false
+    hot: false
   },
   resolve: {
     alias: {
