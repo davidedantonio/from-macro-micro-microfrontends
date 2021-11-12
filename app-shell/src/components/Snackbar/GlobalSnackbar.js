@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Snackbar from '@material-ui/core/Snackbar'
 import {Alert} from '@material-ui/lab'
@@ -60,46 +60,35 @@ const style = theme => ({
   }
 })
 
-class GlobalSnackbar extends React.Component {
-  
-  handleClose = () => {
-    this.setState({ open: false })
+const GlobalSnackbar = ({ 
+  open,
+  variant,
+  message,
+  anchorOrigin,
+  onClose
+}) => {
 
-    if (this.props.onClose) {
-      this.props.onClose()
+  const [ isOpen, setOpen ] = useState(open ? open : true)
+
+  const handleClose = () => {
+    setOpen(false)
+
+    if (typeof onClose === 'function') {
+      onClose()
     }
   }
 
-  componentDidMount () {
-    if (this.props.open) {
-      this.setState({ open: this.props.open })
-    } else {
-      this.setState({ open: true })
-    }
-  }
-
-  render () {
-    const {
-      variant,
-      message,
-      anchorOrigin,
-      onClose
-    } = this.props
-
-    const open = (this.state && this.state.open) ? this.state.open : null
-
-    return (
-      <Snackbar
-        open={open}
-        onClose={this.handleClose}
-        anchorOrigin={anchorOrigin}
-      >
-        <Alert onClose={onClose} severity={variant}>
-          {message}
-        </Alert>
-      </Snackbar>
-    )
-  }
+  return (
+    <Snackbar
+      open={isOpen}
+      onClose={handleClose}
+      anchorOrigin={anchorOrigin}
+    >
+      <Alert onClose={onClose} severity={variant}>
+        {message}
+      </Alert>
+    </Snackbar>
+  )
 }
 
 GlobalSnackbar.propTypes = {
