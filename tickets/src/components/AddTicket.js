@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {inject, observer} from "mobx-react";
 import {
   Dialog,
@@ -11,7 +11,6 @@ import {
   TextField
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import { Alert } from "@material-ui/lab";
 
 const style = {
   fab: {
@@ -21,118 +20,109 @@ const style = {
   }
 };
 
-@inject('store', 'appShellStore')
-@observer
-class addTicket extends React.Component {
-  state = {
-    ticket: {
+const AddTicket = ({
+  store,
+  appShellStore,
+  classes
+}) => {
+  
+  const [ ticket, setTicket ] = useState({
+    body: null,
+    subject: null
+  })
+
+  const closeModal = () => {
+    store.closeModal();
+    reset();
+  }
+
+  const openModal = () => {
+    setTicket({
       body: null,
       subject: null
-    }
-  }
-
-  closeModal = () => {
-    this.props.store.closeModal();
-    this.reset();
-  }
-
-  openModal = () => {
-    this.setState({
-      ticket: {
-        body: null,
-        subject: null
-      }
     });
 
-    this.props.store.openModal();
+    store.openModal();
   }
 
-  reset = () => {
-    this.setState({
-      ticket: {
-        body: null,
-        subject: null
-      }
+  const reset = () => {
+    setTicket({
+      body: null,
+      subject: null
     });
   }
 
-  saveTicket = async () => {
+  const saveTicket = async () => {
     try {
-      await this.props.store.addTicket(this.state.ticket)
-      this.props.appShellStore.showMessage({
+      await store.addTicket(ticket)
+      appShellStore.showMessage({
         variant: 'success',
         message: `Ticket created!`
       });
+      reset();
+      closeModal();
     } catch (e) {
-      this.props.appShellStore.showMessage({
+      appShellStore.showMessage({
         variant: 'error',
-        message: e.emssage
+        message: e.message
       });
     }
   }
-
-  render () {
-    const { open } = this.state;
-    const { classes, store } = this.props;
-
-    return (
-      <React.Fragment>
-        <Fab
-          onClick={() => this.openModal()}
-          aria-label={"Add Ticket"}
-          className={classes.fab}
-          color={'primary'}>
-          <Add />
-        </Fab>
-        <Dialog
-          open={store.opened}
-          maxWidth={'sm'}
-        >
-          <DialogTitle>Add Ticket</DialogTitle>
-          <DialogContent>
-            <Grid container direction={'row'} spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  id="subject"
-                  label="Subject"
-                  variant="filled"
-                  fullWidth
-                  onChange={e => this.setState({ ticket: Object.assign(this.state.ticket, { subject: e.target.value }) })}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="body"
-                  label="Body"
-                  rows={9}
-                  rowsMax={9}
-                  variant="filled"
-                  fullWidth
-                  onChange={e => this.setState({ ticket: Object.assign(this.state.ticket, { body: e.target.value }) })}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                {this.props.store.error ? <Alert severity={'error'}>{this.props.store.error}</Alert> : null}
-              </Grid>
+  
+  return (
+    <React.Fragment>
+      <Fab
+        onClick={() => openModal()}
+        aria-label={"Add Ticket"}
+        className={classes.fab}
+        color={'primary'}>
+        <Add />
+      </Fab>
+      <Dialog
+        open={store.opened}
+        maxWidth={'sm'}
+      >
+        <DialogTitle>Add Ticket</DialogTitle>
+        <DialogContent>
+          <Grid container direction={'row'} spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                id="subject"
+                label="Subject"
+                variant="filled"
+                fullWidth
+                onChange={e => setTicket(Object.assign(ticket, { subject: e.target.value }))}
+              />
             </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              color={'primary'}
-              onClick={() => this.closeModal()}>
-              Close
-            </Button>
-            <Button
-              color={'secondary'}
-              onClick={this.saveTicket}
-            >
-              Save
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </React.Fragment>
-    );
-  }
+            <Grid item xs={12}>
+              <TextField
+                id="body"
+                label="Body"
+                rows={9}
+                rowsMax={9}
+                variant="filled"
+                fullWidth
+                onChange={e => setTicket(Object.assign(ticket, { body: e.target.value }))}
+              />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            color={'primary'}
+            onClick={() => closeModal()}>
+            Close
+          </Button>
+          <Button
+            color={'secondary'}
+            onClick={saveTicket}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+  );
 }
 
-export default withStyles(style)(addTicket);
+export default inject('store', 'appShellStore')(observer(withStyles(style)(AddTicket)));

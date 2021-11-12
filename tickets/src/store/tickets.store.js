@@ -44,14 +44,10 @@ class TicketsStore {
 
   @action
   async addTicket (ticket) {
+    console.log(ticket)
     if (!ticket.subject || !ticket.body) {
-      this.error = 'All fields are required!'
-      return;
+      throw new Error('All fields are required!')
     }
-
-    Object.assign(ticket, {
-      creation_date: new Date()
-    })
 
     try {
       await client.post(`/api/ticket`, ticket);
