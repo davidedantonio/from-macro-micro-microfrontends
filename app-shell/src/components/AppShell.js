@@ -1,10 +1,10 @@
 import React from "react";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Provider } from "mobx-react";
 import {appShellStore} from "../store/app-shell.store";
 import MainApp from "./MainApp";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     common: {
       black: '#212121'

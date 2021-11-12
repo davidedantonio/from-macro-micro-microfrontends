@@ -18,7 +18,6 @@ class UsersStore {
     try {
       const response = await client.get("/api/user");
       this.rows = response.data;
-      console.log(this.rows)
     } catch (e) {
       console.log(e)
     }
