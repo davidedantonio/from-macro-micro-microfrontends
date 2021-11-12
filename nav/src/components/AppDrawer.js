@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import {
   ChevronLeft as ChevronLeftIcon,
-  Dashboard as DashboardIcon,
   People as UsersIcon,
   ConfirmationNumber as TicketsIcon,
   Ballot as BallotIcon
@@ -54,7 +53,7 @@ const styles = (theme) => ({
   }
 });
 
-function ListItemLink(props) {
+const ListItemLink = props => {
   const selected = useMatch(props.to);
   const CustomLink = React.useMemo(
     () =>
@@ -74,37 +73,31 @@ function ListItemLink(props) {
   );
 }
 
-@inject('appShellStore')
-@observer
-class AppDrawer extends React.Component {
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(
-            classes.drawerPaper,
-            !this.props.appShellStore.drawerOpen && classes.drawerPaperClose
-          ),
-        }}
-        open={this.props.appShellStore.drawerOpen}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={() => this.props.appShellStore.openCloseDrawer()}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <ListItemLink to="tickets" icon={<TicketsIcon className={classes.menuIcon} />} text="Tickets" />
-          <ListItemLink to="users" icon={<UsersIcon className={classes.menuIcon} />} text="Users" />
-          <ListItemLink to="vue" icon={<BallotIcon className={classes.menuIcon} />} text="Vue" />
-        </List>
-      </Drawer>
-    );
-  }
+const AppDrawer = ({ classes, appShellStore }) => {
+  return (
+    <Drawer
+      variant="permanent"
+      classes={{
+        paper: clsx(
+          classes.drawerPaper,
+          !appShellStore.drawerOpen && classes.drawerPaperClose
+        ),
+      }}
+      open={appShellStore.drawerOpen}
+    >
+      <div className={classes.toolbarIcon}>
+        <IconButton onClick={() => appShellStore.openCloseDrawer()}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </div>
+      <Divider />
+      <List>
+        <ListItemLink to="tickets" icon={<TicketsIcon className={classes.menuIcon} />} text="Tickets" />
+        <ListItemLink to="users" icon={<UsersIcon className={classes.menuIcon} />} text="Users" />
+        <ListItemLink to="vue" icon={<BallotIcon className={classes.menuIcon} />} text="Vue" />
+      </List>
+    </Drawer>
+  );
 }
 
-export default withStyles(styles)(AppDrawer)
+export default inject('appShellStore')(observer(withStyles(styles)(AppDrawer)));

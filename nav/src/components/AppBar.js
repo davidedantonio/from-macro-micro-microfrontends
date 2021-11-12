@@ -45,16 +45,15 @@ const style = (theme) => ({
   }
 });
 
-@inject('appShellStore')
-@observer
-class AppBar extends React.Component {
-  render () {
-    const { classes, appShellStore } = this.props;
 
-    return (
+const AppBar = ({
+  classes,
+  appShellStore
+}) => {
+  return (
     <MuiAppBar
           position="absolute"
-          className={clsx(classes.appBar, this.props.appShellStore.drawerOpen && classes.appBarShift)}
+          className={clsx(classes.appBar, appShellStore.drawerOpen && classes.appBarShift)}
         >
       <Toolbar className={classes.toolbar}>
         <Grid
@@ -70,7 +69,7 @@ class AppBar extends React.Component {
               onClick={() => appShellStore.openCloseDrawer()}
               className={clsx(
                 classes.menuButton,
-                this.props.appShellStore.drawerOpen && classes.menuButtonHidden
+                appShellStore.drawerOpen && classes.menuButtonHidden
               )}
             >
               <MenuIcon />
@@ -99,8 +98,7 @@ class AppBar extends React.Component {
 
       </Toolbar>
     </MuiAppBar>
-    );
-  }
+  );
 }
 
-export default withStyles(style)(AppBar);
+export default inject('appShellStore')(observer(withStyles(style)(AppBar)));
