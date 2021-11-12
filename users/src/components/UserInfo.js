@@ -8,74 +8,74 @@ import {
   Grid, Button, Typography
 } from "@material-ui/core";
 
-@inject('store', 'appShellStore')
-@observer
-class UserInfo extends React.Component {
-  deleteUser = async () => {
-    const { fullName } = this.props.store.currentUser;
+const UserInfo = ({
+  store,
+  appShellStore
+}) => {
+  const { currentUser } = store;
+
+  const deleteUser = async () => {
+    const { fullName } = currentUser;
 
     try {
-      await this.props.store.deleteUser();
-      this.props.appShellStore.showMessage({
+      await store.deleteUser();
+      appShellStore.showMessage({
         variant: 'success',
         message: `User ${fullName} created!`
       });
     } catch (e) {
-      this.props.appShellStore.showMessage({
+      appShellStore.showMessage({
         variant: 'error',
         message: e.message
       });
     }
   }
 
-  render () {
-    const { currentUser } = this.props.store;
-
-    return (
-      <Dialog
-        open={currentUser !== null}
-      >
-        <DialogTitle>User Info</DialogTitle>
-        <DialogContent>
-          <Grid container direction={'row'}>
-            {currentUser ? (
-              <React.Fragment>
-                <Grid item xs={4}>
-                  <Typography><strong>Username</strong></Typography>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography>
-                    {currentUser.username}
-                  </Typography>
-                </Grid>
-                <Grid item xs={4}>
-                  <Typography><strong>Full Name</strong></Typography>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography>
-                    {currentUser.fullName}
-                  </Typography>
-                </Grid>
-              </React.Fragment>
-            ) : null}
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            color={'primary'}
-            onClick={() => this.props.store.resetUserInfo()}>
-            Close
-          </Button>
-          <Button
-            color={'secondary'}
-            onClick={this.deleteUser}
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
+  return (
+    <Dialog
+      maxWidth='md'
+      open={currentUser !== null}
+    >
+      <DialogTitle>User Info</DialogTitle>
+      <DialogContent>
+        <Grid container direction={'row'}>
+          {currentUser ? (
+            <Grid container>
+              <Grid item xs={4}>
+                <Typography><strong>Username</strong></Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography>
+                  {currentUser.username}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography><strong>Full Name</strong></Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography>
+                  {currentUser.fullName}
+                </Typography>
+              </Grid>
+            </Grid>
+          ) : null}
+        </Grid>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          color={'primary'}
+          onClick={() => store.resetUserInfo()}>
+          Close
+        </Button>
+        <Button
+          color={'secondary'}
+          onClick={() => deleteUser()}
+        >
+          Delete
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
 
-export default UserInfo;
+export default inject('store', 'appShellStore')(observer(UserInfo));

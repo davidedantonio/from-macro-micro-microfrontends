@@ -57,8 +57,7 @@ class UsersStore {
   @action
   async addUser (user) {
     if (!user.username || !user.fullName || !user.password) {
-      this.error = 'All fields are required!'
-      return;
+      throw new Error('All fields are required!')
     }
 
     try {
